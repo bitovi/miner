@@ -18,13 +18,23 @@ The following options are available:
 * `timeout` - The timeout (in *ms*) after which the process will be killed if
 it hasn't reported back a valid URL (default: `30000`)
 
-
-    var miner = require('miner');
-    miner.localtunnel({
-      port : 8080
-    }, function(error, url, process) {
-      process.kill();
-    });
+```javascript
+  var miner = require('miner');
+  miner.localtunnel({
+    port : 8080
+  }, function(error, url, process) {
+    process.kill();
+  });
+```
 
 ## Pagekite
 
+```javascript
+  var miner = require('miner');
+  miner.pagekite({
+    name : 'myname',
+    port : 8080
+  }, function(error, url, process) {
+    process.kill();
+  });
+```
