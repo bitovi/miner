@@ -1,10 +1,10 @@
 {
   "name": "miner",
   "description": "Localhost tunelling service wrappers",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "http://github.com/daffl/miner",
   "author": "David Luecke",
-  "main": "lib/index.js",
+  "main": "lib/miner.js",
   "engines": {
     "node": "~0.6"
   },
