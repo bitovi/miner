@@ -8,6 +8,10 @@
   "engines": {
     "node": "~0.6"
   },
+  "devDependencies" : {
+    "mocha" : ">= 1.4.0",
+    "expect.js" : ">= 0.1.2"
+  },
   "dependencies": {
     "winston" : "> 0.6.0"
   }

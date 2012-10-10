@@ -19,6 +19,20 @@ Currently supported services:
 
 ## Default tunnel
 
+Use the default tunnel to access your localhost through the Miner interface using the following options:
+
+* `port` - The port to share (default: none `80`)
+* `hostname` - The hostname to use (default: `localhost`)
+* `useOsHostname` - Use the system hostname if set to `true` and `hostname` is not set
+
+```javascript
+  var miner = require('miner');
+  miner.local({
+    port : 8080
+  }, function(error, url, process) {
+    url // -> http://localhost:8080
+  });
+```
 
 ## Localtunnel
 
@@ -69,3 +83,4 @@ it hasn't reported back a valid URL (default: `30000`)
 
 ## Showoff.io
 
+    // TODO
