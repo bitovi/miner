@@ -3,10 +3,18 @@
   "description": "Localhost tunelling service wrappers",
   "version": "0.1.0",
   "homepage": "http://github.com/daffl/miner",
-  "author": "David Luecke",
+  "author" : {
+    "name" : "David Luecke",
+    "email" : "daff@neyeon.com",
+    "web" : "http://daffl.github.com"
+  },
   "main": "lib/miner.js",
   "engines": {
-    "node": "~0.6"
+    "node": "~0.8"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "git@github.com:daffl/miner.git"
   },
   "devDependencies" : {
     "mocha" : ">= 1.4.0",

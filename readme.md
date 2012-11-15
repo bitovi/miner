@@ -1,7 +1,7 @@
 # Miner
 
 Miner wraps localhost tunelling services to easily expose your Node server to the web.
-The default service interface looks like this:
+The Miner service interface looks like this:
 
 ```javascript
   var miner = require('miner');
@@ -15,11 +15,40 @@ The default service interface looks like this:
 See the [ChildProcess documentation](http://nodejs.org/api/child_process.html#child_process_class_childprocess)
 for more information about the `process` object.
 
-Currently supported services:
+## Quick Start
 
-## Default tunnel
+Lets create the basic NodeJS HTTP server example and make it available to the web via
+[Localtunnel](http://progrium.com/localtunnel/):
 
-Use the default tunnel to access your localhost through the Miner interface using the following options:
+    var http = require('http');
+    var miner = require('miner');
+    var port = 1337;
+
+    http.createServer(function (req, res) {
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.end('Hello World\n');
+    }).listen(port, '127.0.0.1');
+    console.log('Server running at http://127.0.0.1:1337/');
+
+    miner.localtunnel({
+      port: port
+    }, function(error, url, process) {
+      if(error) {
+        console.log('ERROR', error);
+        return;
+      }
+      console.log('Your server is now available to the world at:');
+      console.log(url);
+    });
+
+Just visit the url to see the server output.
+
+## Tunneling services
+
+### Default tunnel
+
+The default tunnel is a dummy tunelling service that returns the URL for a given hostname and port. That way you
+can use the miner interface even when just connecting to a local server.
 
 * `port` - The port to share (default: none `80`)
 * `hostname` - The hostname to use (default: `localhost`)
@@ -29,12 +58,12 @@ Use the default tunnel to access your localhost through the Miner interface usin
   var miner = require('miner');
   miner.local({
     port : 8080
-  }, function(error, url, process) {
+  }, function(error, url) {
     url // -> http://localhost:8080
   });
 ```
 
-## Localtunnel
+### Localtunnel
 
 [Localtunnel](http://localtunnel.com) is a free localhost tunelling service. Ruby and the `gem` command need
 to be in your path for it to work. If the Gem is not installed it will be installed automatically.
@@ -56,7 +85,7 @@ it hasn't reported back a valid URL (default: `30000`)
   });
 ```
 
-## Pagekite
+### Pagekite
 
 [Pagekite](https://pagekite.net/) is a reliable way to make localhost part of the Web.
 Sign up for the free one month trial [here](https://pagekite.net/signup/).
@@ -81,6 +110,28 @@ it hasn't reported back a valid URL (default: `30000`)
 ```
 
 
-## Showoff.io
+### Browserstack
 
-    // TODO
+[BrowserStack](http://browserstack.com) is a cross browser testing tool. With their API it also provides
+[command line tunneling](http://www.browserstack.com/local-testing#cmd-tunnel).
+You need a Browserstack account with API access and have to provide your
+[private key](http://www.browserstack.com/local-testing#cmd-tunnel) to the miner service. Unlike other
+services it will not provide a publicly acessible URL but the given URL will be accessible on your BrowserStack
+ instances.
+
+* `key` - Your browserstack command line tunnel key
+* `host` - The hostname to share another internal server (default: `localhost`)
+* `port` - The port to share (default: `80`)
+* `timeout` - The timeout (in *ms*) after which the process will be killed if
+* `ssl` - The optional SSL port (default: `0`)
+it hasn't reported back a valid URL (default: `30000`)
+* `java` - The java executable (default: `java`)
+
+```javascript
+  var miner = require('miner');
+  miner.browserstack({
+    port : 8080
+  }, function(error, url, process) {
+    process.kill();
+  });
+```
