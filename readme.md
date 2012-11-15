@@ -1,6 +1,9 @@
 # Miner
 
-Miner wraps localhost tunelling services to easily expose your Node server to the web.
+Miner wraps localhost tunelling services to easily expose your Node server to the web. As always installation is as easy as
+
+> npm install miner
+
 The Miner service interface looks like this:
 
 ```javascript
