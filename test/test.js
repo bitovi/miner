@@ -5,6 +5,7 @@ var request = require('request');
 var os = require('os');
 
 describe("Miner test suite", function() {
+	var isTravis = process.env['TRAVIS'] === 'true';
 	var responseContent = 'Echo!\n';
 	var port = 1337;
 	var server;
@@ -47,6 +48,12 @@ describe("Miner test suite", function() {
 			}, function (error, url) {
 				expect(error).to.be.null;
 				expect(url).to.be('http://' + os.hostname() + ':' + port);
+
+				// Travis won't let us access os.hostname(), only localhost
+				if(isTravis) {
+					return done();
+				}
+
 				request(url, function (error, response, body) {
 					expect(error).to.be.null;
 					expect(body).to.be(responseContent);
@@ -56,24 +63,32 @@ describe("Miner test suite", function() {
 		});
 	});
 
-	if(process.env['TRAVIS'] !== 'true') {
-		describe('Localtunnel', function() {
-			it.skip('Opens localtunnel, returns URL', function(done) {
-				miner.localtunnel({
-					port: port
-				}, function(error, url, process) {
+	describe('Localtunnel', function() {
+		// Localtunnel is currently offline
+		it.skip('Opens localtunnel, returns URL', function(done) {
+			miner.localtunnel({
+				port: port
+			}, function(error, url, process) {
+				expect(error).to.be.null;
+				expect(url).to.contain('localtunnel.com');
+				request(url, function (error, response, body) {
 					expect(error).to.be.null;
-					expect(url).to.contain('localtunnel.com');
-					request(url, function (error, response, body) {
-						expect(error).to.be.null;
-						expect(body).to.equal(responseContent);
-						process.kill();
-						done();
-					});
+					expect(body).to.equal(responseContent);
+					process.kill();
+					done();
 				});
 			});
 		});
+	});
 
+	describe('Browserstack', function() {
+		it.skip('Starts Browserstack tunnel with key and makes request to local server', function() {
+
+		});
+	});
+
+	if(!isTravis) {
+		// TODO figure out how to set up Pagekite in Travis
 		describe('Pagekite', function() {
 			it('Opens pagekite, returns URL', function(done) {
 				miner.pagekite({
