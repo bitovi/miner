@@ -1,31 +1,34 @@
 {
-	"name": "miner",
-	"description": "Localhost tunelling service wrappers",
-	"version": "0.1.0",
-	"homepage": "http://daffl.github.com/miner",
-	"author": {
-		"name": "David Luecke",
-		"email": "daff@neyeon.com",
-		"web": "http://daffl.github.com"
-	},
-	"main": "lib/miner.js",
-	"engines": {
-		"node": "~0.8"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:daffl/miner.git"
-	},
-	"scripts": {
-		"test": "mocha test -t 30000"
-	},
-	"devDependencies": {
-		"mocha": ">= 1.4.0",
-		"expect.js": ">= 0.1.2",
-		"request": "~2.22.0",
-		"connect": "~2.8.4"
-	},
-	"dependencies": {
-		"winston": "> 0.6.0"
-	}
+  "name": "miner",
+  "description": "Localhost tunelling service wrappers",
+  "version": "0.1.0",
+  "homepage": "http://daffl.github.com/miner",
+  "author": {
+    "name": "David Luecke",
+    "email": "daff@neyeon.com",
+    "web": "http://daffl.github.com"
+  },
+  "main": "lib/miner.js",
+  "engines": {
+    "node": "~0.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:daffl/miner.git"
+  },
+  "scripts": {
+    "test": "mocha test -t 60000"
+  },
+  "devDependencies": {
+    "mocha": ">= 1.4.0",
+    "expect.js": ">= 0.1.2",
+    "request": "~2.22.0",
+    "connect": "~2.8.4",
+    "browserstack": "~0.2.0"
+  },
+  "dependencies": {
+    "browserstacktunnel-wrapper": "^1.2.1",
+    "localtunnel": "^1.2.0",
+    "winston": "> 0.6.0"
+  }
 }

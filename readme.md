@@ -1,5 +1,7 @@
 # Miner
 
+[![Build Status](https://travis-ci.org/daffl/miner.png?branch=master)](https://travis-ci.org/daffl/miner)
+
 Miner wraps localhost tunelling services to easily expose your Node server to the web. As always installation is as easy as
 
 > npm install miner
@@ -68,25 +70,33 @@ can use the miner interface even when just connecting to a local server.
 
 ### Localtunnel
 
-[Localtunnel](http://localtunnel.com) is a free localhost tunelling service. Ruby and the `gem` command need
-to be in your path for it to work. If the Gem is not installed it will be installed automatically.
-The following options are available:
+[Localtunnel](http://localtunnel.me) allows you to easily share a web service on your local development machine without messing with DNS and firewall settings. The following options are available:
 
-* `ssh` - The location of your SSH public key (default: `~/.ssh/id_rsa.pub`)
-* `port` - The port to share (default: `80`)
-* `timeout` - The timeout (in *ms*) after which the process will be killed if
-it hasn't reported back a valid URL (default: `30000`)
-* `gem` - The Gem executable (default: `gem`)
-* `executable` - The localtunnel executable (default: `localtunnel`)
+* `subdomain` A *string* value requesting a specific subdomain on the proxy server. **Note** You may not actually receive this name depending on availablily.
+* `local_host` Proxy to this hostname instead of `localhost`. This will also cause the `Host` header to be re-written to this value in proxied requests.
 
 ```javascript
   var miner = require('miner');
   miner.localtunnel({
     port : 8080
-  }, function(error, url, process) {
-    process.kill();
+  }, function(error, url, tunnel) {
+    tunnel.close();
   });
 ```
+
+The `tunnel` instance returned to your callback emits the following events
+
+|event|args|description|
+|----|----|----|
+|error|err|fires when an error happens on the tunnel|
+|close||fires when the tunnel has closed|
+
+The `tunnel instance has the following methods
+
+|method|args|description|
+|----|----|----|
+|close||close the tunnel|
+
 
 ### Pagekite
 
@@ -133,8 +143,15 @@ it hasn't reported back a valid URL (default: `30000`)
 ```javascript
   var miner = require('miner');
   miner.browserstack({
-    port : 8080
+    port : 8080,
+    key: '<your API key>'
   }, function(error, url, process) {
     process.kill();
   });
 ```
+
+## Changelog
+
+__0.1.0__
+
+- Initial release
