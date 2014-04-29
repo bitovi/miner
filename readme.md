@@ -98,6 +98,38 @@ The `tunnel instance has the following methods
 |close||close the tunnel|
 
 
+### Browserstack
+
+[BrowserStack](http://browserstack.com) is a cross browser testing tool. You need a Browserstack account with API access and have to provide your [private key](http://www.browserstack.com/local-testing#cmd-tunnel) to the miner service. Unlike other
+services it will not provide a publicly acessible URL but the given URL will be accessible on your BrowserStack
+ instances. The configuration is almost identical with the [BrowserStackTunnel](https://github.com/pghalliday/node-BrowserStackTunnel) module which is used internally, additionally you can pass simply a port to tunnel.
+
+* `key` - Your browserstack command line tunnel key
+* `hosts` - An array of hosts to tunnel
+* `port` - The port to share (default: `80`)
+* `osxBin` - optionally override the default bin directory for the OSX binary
+* `linux32Bin` - optionally override the default bin directory for the Linux 32 bit binary
+* `linux64Bin` - optionally override the default bin directory for the Linux 64 bit binary
+* `jarFile` - on other platforms, optionally override the default path to the BrowserStackTunnel.jar file
+* `tunnelIdentifier` - optionally set the -tunnelIdentifier option
+* `skipCheck` - optionally set the -skipCheck option
+* `vtrue, optionally set the -v (verbose) option
+* `proxyUser` - optionally set the proxy user
+* `proxyPass` - optionally set the proxy password
+* `proxyPort` - optionally set the proxy port
+* `proxyHost` - optionally set the proxy host
+
+```javascript
+  var miner = require('miner');
+  miner.browserstack({
+    port : 8080,
+    key: '<your API key>'
+  }, function(error, url, tunnel) {
+    tunnel.kill();
+  });
+```
+
+
 ### Pagekite
 
 [Pagekite](https://pagekite.net/) is a reliable way to make localhost part of the Web.
@@ -117,40 +149,20 @@ it hasn't reported back a valid URL (default: `30000`)
   miner.pagekite({
     name : 'myname',
     port : 8080
-  }, function(error, url, process) {
-    process.kill();
+  }, function(error, url, tunnel) {
+    tunnel.kill();
   });
 ```
 
-
-### Browserstack
-
-[BrowserStack](http://browserstack.com) is a cross browser testing tool. With their API it also provides
-[command line tunneling](http://www.browserstack.com/local-testing#cmd-tunnel).
-You need a Browserstack account with API access and have to provide your
-[private key](http://www.browserstack.com/local-testing#cmd-tunnel) to the miner service. Unlike other
-services it will not provide a publicly acessible URL but the given URL will be accessible on your BrowserStack
- instances.
-
-* `key` - Your browserstack command line tunnel key
-* `host` - The hostname to share another internal server (default: `localhost`)
-* `port` - The port to share (default: `80`)
-* `timeout` - The timeout (in *ms*) after which the process will be killed if
-* `ssl` - The optional SSL port (default: `0`)
-it hasn't reported back a valid URL (default: `30000`)
-* `java` - The java executable (default: `java`)
-
-```javascript
-  var miner = require('miner');
-  miner.browserstack({
-    port : 8080,
-    key: '<your API key>'
-  }, function(error, url, process) {
-    process.kill();
-  });
-```
 
 ## Changelog
+
+__0.2.0__
+
+- Removed old localtunnel and moved to [localtunnel.me](http://localtunnel.me)
+- Moved to using [Node Browserstack tunnel](https://github.com/pghalliday/node-BrowserStackTunnel) module
+- Better tests, runs Browserstack tests in Travis
+- Added JSHint and Grunt build
 
 __0.1.0__
 

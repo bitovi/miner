@@ -1,12 +1,13 @@
-var expect = require('expect.js');
-var miner = require('../lib/miner.js');
+var assert = require('assert');
 var connect = require('connect');
 var request = require('request');
 var os = require('os');
 var BrowserStack = require('browserstack');
 
+var miner = require('../lib/miner.js');
+
 describe("Miner test suite", function () {
-  var isTravis = process.env['TRAVIS'] === 'true';
+  var isTravis = process.env.TRAVIS === 'true';
   var responseContent = 'Echo!\n';
   var port = 1337;
   var server;
@@ -25,18 +26,18 @@ describe("Miner test suite", function () {
   describe('Default', function () {
     it('Creates a default URL', function (done) {
       miner.local({}, function (err, url) {
-        expect(url).to.be('http://localhost');
+        assert.equal(url, 'http://localhost');
         done();
       });
     });
 
     it('Uses custom port and reaches host', function (done) {
       miner.local({ port: port }, function (error, url) {
-        expect(error).to.be.null;
-        expect(url).to.be('http://localhost:' + port);
+        assert.ok(!error);
+        assert.equal(url, 'http://localhost:' + port);
         request(url, function (error, response, body) {
-          expect(error).to.be.null;
-          expect(body).to.be(responseContent);
+          assert.ok(!error);
+          assert.equal(body, responseContent);
           done();
         });
       });
@@ -47,8 +48,8 @@ describe("Miner test suite", function () {
         port: port,
         useOsHostname: true
       }, function (error, url) {
-        expect(error).to.be.null;
-        expect(url).to.be('http://' + os.hostname() + ':' + port);
+        assert.ok(!error);
+        assert.equal(url, 'http://' + os.hostname() + ':' + port);
 
         // Travis won't let us access os.hostname(), only localhost
         if (isTravis) {
@@ -56,8 +57,8 @@ describe("Miner test suite", function () {
         }
 
         request(url, function (error, response, body) {
-          expect(error).to.be.null;
-          expect(body).to.be(responseContent);
+          assert.ok(!error);
+          assert.equal(body, responseContent);
           done();
         });
       });
@@ -69,11 +70,11 @@ describe("Miner test suite", function () {
       miner.localtunnel({
         port: port
       }, function (error, url, tunnel) {
-        expect(error).to.be.null;
-        expect(url).to.contain('localtunnel.me');
+        assert.ok(!error);
+        assert.ok(url.indexOf('localtunnel.me') !== -1);
         request(url, function (error, response, body) {
-          expect(error).to.be.null;
-          expect(body).to.equal(responseContent);
+          assert.ok(!error);
+          assert.equal(body, responseContent);
           tunnel.kill();
           done();
         });
@@ -101,14 +102,14 @@ describe("Miner test suite", function () {
           key: process.env.BROWSERSTACK_KEY
         }, function (error, url, browserstackTunnel) {
           tunnel = browserstackTunnel;
-          expect(error).to.be.null;
+          assert.ok(!error);
           client.createWorker({
             os: 'win',
             browser: 'ie',
             version: '10.0',
             url: url
           }, function (error) {
-            expect(error).to.be.null;
+            assert.ok(!error);
           });
         });
       });
@@ -123,11 +124,11 @@ describe("Miner test suite", function () {
           name: 'miner',
           port: port
         }, function (error, url, process) {
-          expect(error).to.be.null;
-          expect(url).to.contain('pagekite.me');
+          assert.ok(!error);
+          assert.ok(url.indexOf('pagekite.me') !== -1);
           request(url, function (error, response, body) {
-            expect(error).to.be.null;
-            expect(body).to.equal(responseContent);
+            assert.ok(!error);
+            assert.equal(body, responseContent);
             process.kill();
             done();
           });

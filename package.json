@@ -17,18 +17,21 @@
     "url": "git@github.com:daffl/miner.git"
   },
   "scripts": {
-    "test": "mocha test -t 60000"
+    "test": "grunt test"
   },
   "devDependencies": {
-    "mocha": ">= 1.4.0",
-    "expect.js": ">= 0.1.2",
-    "request": "~2.22.0",
+    "browserstack": "~0.2.0",
     "connect": "~2.8.4",
-    "browserstack": "~0.2.0"
+    "grunt": "^0.4.4",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-release": "^0.7.0",
+    "grunt-simple-mocha": "^0.4.0",
+    "mocha": ">= 1.4.0",
+    "request": "~2.22.0"
   },
   "dependencies": {
     "browserstacktunnel-wrapper": "^1.2.1",
-    "localtunnel": "^1.2.0",
-    "winston": "> 0.6.0"
+    "localtunnel": "^1.2.0"
   }
 }
