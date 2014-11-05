@@ -116,24 +116,22 @@ describe("Miner test suite", function () {
     });
   });
 
-  if (!isTravis) {
-    // TODO figure out how to set up Pagekite in Travis CI
-    describe('Pagekite', function () {
-      it('Opens pagekite, returns URL', function (done) {
-        miner.pagekite({
-          name: 'miner',
-          port: port
-        }, function (error, url, process) {
+  // TODO figure out how to set up Pagekite in Travis CI
+  describe.skip('Pagekite', function () {
+    it('Opens pagekite, returns URL', function (done) {
+      miner.pagekite({
+        name: 'miner',
+        port: port
+      }, function (error, url, process) {
+        assert.ok(!error);
+        assert.ok(url.indexOf('pagekite.me') !== -1);
+        request(url, function (error, response, body) {
           assert.ok(!error);
-          assert.ok(url.indexOf('pagekite.me') !== -1);
-          request(url, function (error, response, body) {
-            assert.ok(!error);
-            assert.equal(body, responseContent);
-            process.kill();
-            done();
-          });
+          assert.equal(body, responseContent);
+          process.kill();
+          done();
         });
       });
     });
-  }
+  });
 });

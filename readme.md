@@ -8,13 +8,13 @@ Miner wraps localhost tunelling services to easily expose your Node server to th
 
 The Miner service interface looks like this:
 
-```javascript
-  var miner = require('miner');
-  miner.<servicename>(configuration, function(error, url, process) {
-    error // -> An Error instance on errors
-    url // -> The tunnel URL
-    process // -> The ChildProcess object if applicable
-  });
+```js
+var miner = require('miner');
+miner.<servicename>(configuration, function(error, url, process) {
+  error // -> An Error instance on errors
+  url // -> The tunnel URL
+  process // -> The ChildProcess object if applicable
+});
 ```
 
 See the [ChildProcess documentation](http://nodejs.org/api/child_process.html#child_process_class_childprocess)
@@ -25,26 +25,28 @@ for more information about the `process` object.
 Lets create the basic NodeJS HTTP server example and make it available to the web via
 [Localtunnel](http://progrium.com/localtunnel/):
 
-    var http = require('http');
-    var miner = require('miner');
-    var port = 1337;
+```js
+var http = require('http');
+var miner = require('miner');
+var port = 1337;
 
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(port, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(port, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:1337/');
 
-    miner.localtunnel({
-      port: port
-    }, function(error, url, process) {
-      if(error) {
-        console.log('ERROR', error);
-        return;
-      }
-      console.log('Your server is now available to the world at:');
-      console.log(url);
-    });
+miner.localtunnel({
+  port: port
+}, function(error, url, process) {
+  if(error) {
+    console.log('ERROR', error);
+    return;
+  }
+  console.log('Your server is now available to the world at:');
+  console.log(url);
+});
+```
 
 Just visit the url to see the server output.
 
@@ -59,13 +61,13 @@ can use the miner interface even when just connecting to a local server.
 * `hostname` - The hostname to use (default: `localhost`)
 * `useOsHostname` - Use the system hostname if set to `true` and `hostname` is not set
 
-```javascript
-  var miner = require('miner');
-  miner.local({
-    port : 8080
-  }, function(error, url) {
-    url // -> http://localhost:8080
-  });
+```js
+var miner = require('miner');
+miner.local({
+  port : 8080
+}, function(error, url) {
+  url // -> http://localhost:8080
+});
 ```
 
 ### Localtunnel
@@ -75,13 +77,13 @@ can use the miner interface even when just connecting to a local server.
 * `subdomain` A *string* value requesting a specific subdomain on the proxy server. **Note** You may not actually receive this name depending on availablily.
 * `local_host` Proxy to this hostname instead of `localhost`. This will also cause the `Host` header to be re-written to this value in proxied requests.
 
-```javascript
-  var miner = require('miner');
-  miner.localtunnel({
-    port : 8080
-  }, function(error, url, tunnel) {
-    tunnel.close();
-  });
+```js
+var miner = require('miner');
+miner.localtunnel({
+  port : 8080
+}, function(error, url, tunnel) {
+  tunnel.close();
+});
 ```
 
 The `tunnel` instance returned to your callback emits the following events
@@ -119,14 +121,14 @@ services it will not provide a publicly acessible URL but the given URL will be 
 * `proxyPort` - optionally set the proxy port
 * `proxyHost` - optionally set the proxy host
 
-```javascript
-  var miner = require('miner');
-  miner.browserstack({
-    port : 8080,
-    key: '<your API key>'
-  }, function(error, url, tunnel) {
-    tunnel.kill();
-  });
+```js
+var miner = require('miner');
+miner.browserstack({
+  port : 8080,
+  key: '<your API key>'
+}, function(error, url, tunnel) {
+  tunnel.kill();
+});
 ```
 
 
@@ -144,14 +146,14 @@ After that it can be initializedwith these optiosn:
 it hasn't reported back a valid URL (default: `30000`)
 * `executable` - The pagekite executable (default: `pagekite.py`)
 
-```javascript
-  var miner = require('miner');
-  miner.pagekite({
-    name : 'myname',
-    port : 8080
-  }, function(error, url, tunnel) {
-    tunnel.kill();
-  });
+```js
+var miner = require('miner');
+miner.pagekite({
+  name : 'myname',
+  port : 8080
+}, function(error, url, tunnel) {
+  tunnel.kill();
+});
 ```
 
 
