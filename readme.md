@@ -155,17 +155,3 @@ miner.pagekite({
   tunnel.kill();
 });
 ```
-
-
-## Changelog
-
-__0.2.0__
-
-- Removed old localtunnel and moved to [localtunnel.me](http://localtunnel.me)
-- Moved to using [Node Browserstack tunnel](https://github.com/pghalliday/node-BrowserStackTunnel) module
-- Better tests, runs Browserstack tests in Travis
-- Added JSHint and Grunt build
-
-__0.1.0__
-
-- Initial release
