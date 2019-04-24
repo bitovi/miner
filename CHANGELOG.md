@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/daffl/miner/tree/HEAD)
-
-[Full Changelog](https://github.com/daffl/miner/compare/0.2.1...HEAD)
+## [v1.0.0](https://github.com/daffl/miner/tree/v1.0.0) (2019-04-24)
+[Full Changelog](https://github.com/daffl/miner/compare/0.2.1...v1.0.0)
 
 **Implemented enhancements:**
 
@@ -10,6 +9,7 @@
 
 **Merged pull requests:**
 
+- Update release process and add Changelog [\#3](https://github.com/daffl/miner/pull/3) ([daffl](https://github.com/daffl))
 - upgrade dependencies [\#2](https://github.com/daffl/miner/pull/2) ([bmomberger-bitovi](https://github.com/bmomberger-bitovi))
 
 ## [0.2.1](https://github.com/daffl/miner/tree/0.2.1) (2014-11-05)
