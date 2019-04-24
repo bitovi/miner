@@ -10,14 +10,19 @@
   },
   "main": "lib/miner.js",
   "engines": {
-    "node": "~0.10"
+    "node": "> 8.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:daffl/miner.git"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "publish": "git push origin --tags && npm run changelog && git push origin",
+    "changelog": "github_changelog_generator && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish"
   },
   "devDependencies": {
     "browserstack": "^1.5.2",
