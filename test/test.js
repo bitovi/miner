@@ -82,7 +82,7 @@ describe("Miner test suite", function () {
     });
   });
 
-  describe('Browserstack', function () {
+  describe.skip('Browserstack', function () {
     it('Starts Browserstack tunnel, VM makes request to local server', function (done) {
       var otherPort = 1339;
       var client = BrowserStack.createClient({
