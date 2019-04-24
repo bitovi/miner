@@ -1,5 +1,5 @@
 language: node_js
-node_js: '0.10'
+node_js: '12'
 env:
   global:
   - secure: kRQsMhenzxt62HY44zUP6Z8rGDtGYCwVc0DHCkrgVI5VZRp+ZyE5BBkZFnQj0dhgA5Va0HhG9WwC3fU1FreE/oF66Znu62Mjew1YhNiGcuup+m/H6e1shSELjtz6CzADMzzv9UhB924pobZwjo2KD5s4M4HiYuwUEjh8g/+SQEc=
