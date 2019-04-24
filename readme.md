@@ -1,6 +1,6 @@
 # Miner
 
-[![Build Status](https://travis-ci.org/daffl/miner.png?branch=master)](https://travis-ci.org/daffl/miner)
+[![Build Status](https://travis-ci.org/daffl/miner.png?branch=master)](https://travis-ci.org/daffl/miner) [![Greenkeeper badge](https://badges.greenkeeper.io/daffl/miner.svg)](https://greenkeeper.io/)
 
 Miner wraps localhost tunelling services to easily expose your Node server to the web. As always installation is as easy as
 
