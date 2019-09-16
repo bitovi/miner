@@ -37,6 +37,6 @@
   },
   "dependencies": {
     "browserstacktunnel-wrapper": "^2.0.4",
-    "localtunnel": "^1.2.0"
+    "localtunnel": "^2.0.0"
   }
 }
