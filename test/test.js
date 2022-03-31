@@ -71,7 +71,7 @@ describe("Miner test suite", function () {
         port: port
       }, function (error, url, tunnel) {
         assert.ok(!error);
-        assert.ok(url.indexOf('localtunnel.me') !== -1);
+        assert.ok(url.indexOf('loca.lt') !== -1);
         request(url, function (error, response, body) {
           assert.ok(!error);
           assert.equal(body, responseContent);
