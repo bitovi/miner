@@ -18,8 +18,7 @@ module.exports = function(grunt) {
       },
       lib: ['lib/**/*.js', 'Gruntfile.js'],
       test: ['test/**/*.js']
-    },
-    release: {}
+    }
   });
 
   grunt.registerTask('default', 'test');
@@ -27,5 +26,4 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-release');
 };

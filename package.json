@@ -29,14 +29,13 @@
     "connect": "^3.7.0",
     "grunt": "^1.4.1",
     "grunt-cli": "^1.4.3",
-    "grunt-contrib-jshint": "^2.1.0",
-    "grunt-release": "^0.14.0",
+    "grunt-contrib-jshint": "^3.2.0",
     "grunt-simple-mocha": "^0.4.0",
-    "mocha": ">= 1.4.0",
+    "mocha": "^9.2.2",
     "request": "^2.88.2"
   },
   "dependencies": {
-    "browserstacktunnel-wrapper": "^2.0.4",
-    "localtunnel": "^1.9.2"
+    "browserstacktunnel-wrapper": "^2.0.5",
+    "localtunnel": "^2.0.2"
   }
 }
